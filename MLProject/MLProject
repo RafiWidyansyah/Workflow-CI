@@ -1,0 +1,13 @@
+name: proyek-usedcarprice-mlflow
+ 
+conda_env: conda.yaml
+ 
+entry_points:
+  main:
+    parameters:
+      max_depth: {type: int, default: 5}
+      min_samples_leaf: {type: int, default: 2}
+      min_samples_split: {type: int, default: 2}
+      max_features: {type: string, default: "sqrt"}
+      dataset : {type: string, default: "used_car_price_dataset_cleaned_scaled.csv"}
+    command: "python modelling.py {max_depth} {min_samples_leaf} {min_samples_split} {max_features} {dataset}"
