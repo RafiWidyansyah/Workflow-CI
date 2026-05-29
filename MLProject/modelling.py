@@ -5,16 +5,7 @@ from sklearn.model_selection import train_test_split
 import random
 import numpy as np
 import os
-
-
-tracking_uri = "http://127.0.0.1:5000/"
-if tracking_uri:
-    mlflow.set_tracking_uri(tracking_uri)
-else:
-    local_mlflow_dir = os.path.join(os.path.dirname(__file__), "mlruns")
-    mlflow.set_tracking_uri(f"file://{os.path.abspath(local_mlflow_dir)}")
-
-mlflow.set_experiment("Used Car Price Prediction")
+import sys
 
 # Get the directory of this script and construct the CSV path
 csv_path = os.path.join(os.path.dirname(__file__), "used_car_price_dataset_cleaned_scaled.csv")
@@ -30,7 +21,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 input_example = X_train[0:5]
 
 with mlflow.start_run():
-        mlflow.autolog()
     # Train model
         model = RandomForestRegressor()
         model.fit(X_train, y_train)
